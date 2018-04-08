@@ -50,7 +50,35 @@ public class BukuDaoImpl implements BukuDao{
             session.close();
         }
     }
-    
+        @Override
+    public void updateBuku(Buku buku) {
+        Session session = sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+            session.update(buku);
+            session.getTransaction().commit();
+        } catch (Exception exception) {
+            session.getTransaction().rollback();
+            exception.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void deleteBuku(Buku buku) {
+        Session session = sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+            session.delete(buku);
+            session.getTransaction().commit();
+        } catch (Exception exception) {
+            session.getTransaction().rollback();
+            exception.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
 }
 
 
